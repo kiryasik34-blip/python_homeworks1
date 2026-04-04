@@ -1,13 +1,15 @@
-def logger(func):
-    def wrapper(*args, **kwargs):
-        print(f"Функция {func.__name__} вызвана")
-        return func(*args, **kwargs)
-    return wrapper
+def analyze(lst):
+    max_val = max(lst)
+    avg = sum(lst) / len(lst)
+    evens = [x for x in lst if x % 2 == 0]
+
+    return max_val, avg, evens
 
 
-@logger
-def add(a, b):
-    return a + b
+nums = [1, 2, 3, 4, 5, 6]
 
+m, avg, evens = analyze(nums)
 
-print(add(2, 3))
+print("Максимум:", m)
+print("Среднее:", avg)
+print("Чётные:", evens)
