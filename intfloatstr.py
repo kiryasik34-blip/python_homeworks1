@@ -28,4 +28,4 @@ def trace_start(func):
 def hello(a):
     return a
 print(hello(a="hi"))
-
+# цув
