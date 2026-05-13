@@ -1,31 +1,30 @@
-# ЗАДАЧА 2.0 (САМЫЙ ЛЕГКИЙ УРОВЕНЬ)
-# Цель: просто увидеть, что декоратор работает.
+# ЗАДАЧА 2.1 (чуть сложнее)
+# Цель: добавить имя функции в лог.
 #
-# 1) Напиши декоратор trace_start(func)
-# 2) Внутри wrapper:
-#    - печатай строку: start
-#    - вызывай исходную функцию
-#    - возвращай результат исходной функции
-# 3) Примени декоратор к функции hello(), которая возвращает "hi"
-# 4) Вызови: print(hello())
+# 1) На базе trace_start сделай декоратор trace_name(func)
+# 2) Внутри wrapper печатай:
+#    start <имя_функции>
+# 3) Затем вызывай исходную функцию и возвращай ее результат
+# 4) Примени к функции:
+#    def add(a, b): return a + b
+# 5) Вызови:
+#    print(add(2, 3))
 #
-# Ожидаемый вывод:
-# start
-# hi
+# Ожидаемая идея вывода:
+# start add
+# 5
 #
 # Подсказка:
-# - пока без имени функции
-# - просто фиксированная строка "start"
+# - имя функции: func.__name__
 
 def trace_start(func):
     def wrapper(*args, **kwargs):
-        print("start")
+        print(f"start {func.__name__}")
         res = func(*args,**kwargs)
         return res
     return wrapper
 
 @trace_start
-def hello(a):
-    return a
-print(hello(a="hi"))
-# цув
+def add(a, b):
+    return a+b
+print(add(a=2, b=3))
