@@ -1,8 +1,3 @@
-# Этап 2, Задача 6:
-# Сделай полиморфную функцию print_moves(items),
-# которая принимает список объектов и печатает результат move() каждого.
-# Ожидаемый результат:
-# Для списка из Vehicle, Car, Bike, ElectricCar печатаются их move() по порядку.
 class Vehicle:
     def __init__(self, brand: str):
         self.brand = brand
