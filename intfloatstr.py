@@ -1,30 +1,40 @@
-# ЗАДАЧА 2.1 (чуть сложнее)
-# Цель: добавить имя функции в лог.
-#
-# 1) На базе trace_start сделай декоратор trace_name(func)
-# 2) Внутри wrapper печатай:
-#    start <имя_функции>
-# 3) Затем вызывай исходную функцию и возвращай ее результат
-# 4) Примени к функции:
-#    def add(a, b): return a + b
-# 5) Вызови:
-#    print(add(2, 3))
-#
-# Ожидаемая идея вывода:
-# start add
-# 5
-#
-# Подсказка:
-# - имя функции: func.__name__
+# Этап 2, Задача 6:
+# Сделай полиморфную функцию print_moves(items),
+# которая принимает список объектов и печатает результат move() каждого.
+# Ожидаемый результат:
+# Для списка из Vehicle, Car, Bike, ElectricCar печатаются их move() по порядку.
+class Vehicle:
+    def __init__(self, brand: str):
+        self.brand = brand
+    def move(self):
+        return "moving"
+    def info(self):
+        return f"{self.brand}"
 
-def trace_start(func):
-    def wrapper(*args, **kwargs):
-        print(f"start {func.__name__}")
-        res = func(*args,**kwargs)
-        return res
-    return wrapper
+class Car(Vehicle):
+    def __init__(self, brand: str, fuel: int):
+        super().__init__(brand)
+        self.fuel = fuel
+    def info(self):
+        return f'{self.brand}, fuel= {self.fuel}'
+    def move(self):
+        return "driving"
 
-@trace_start
-def add(a, b):
-    return a+b
-print(add(a=2, b=3))
+class Bike(Vehicle):
+    def move(self):
+        return "riding"
+
+class ElectricCar(Car):
+    def __init__(self, brand, battery, fuel):
+        self.battery = battery
+        super().__init__(brand,fuel)
+    def info(self):
+        return f'{self.brand}, fuel={self.fuel}, battery={self.battery}'
+def print_moves(items):
+    for item in items:
+        print(item.move())
+items = [Vehicle('Lada'), Car('lada',10), Bike('Honda'), ElectricCar('yamaha', 'eletro', 15)]
+print(print_moves(items))
+
+
+
